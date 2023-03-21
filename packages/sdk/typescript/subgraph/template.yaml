@@ -50,13 +50,23 @@ dataSources:
         - name: HMToken
           file: '{{{ HMToken.abi }}}'
       eventHandlers:
+        {{#HMToken.skale}}
+        - event: Approval(address,address,uint256)
+        {{/HMToken.skale}}
+        {{^HMToken.skale}}
         - event: Approval(indexed address,indexed address,uint256)
+        {{/HMToken.skale}}
           handler: handleApproval
         - event: BulkApproval(indexed uint256,uint256)
           handler: handleBulkApproval
         - event: BulkTransfer(indexed uint256,uint256)
           handler: handleBulkTransfer
+        {{#HMToken.skale}}
+        - event: Transfer(address,address,uint256)
+        {{/HMToken.skale}}
+        {{^HMToken.skale}}
         - event: Transfer(indexed address,indexed address,uint256)
+        {{/HMToken.skale}}
           handler: handleTransfer
       file: ./src/mapping/HMToken.ts
   - kind: ethereum
