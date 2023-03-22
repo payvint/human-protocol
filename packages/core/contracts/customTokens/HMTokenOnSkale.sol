@@ -57,6 +57,7 @@ contract HMTokenOnSkale is HMTokenInterfaceOnSkale, AccessControlEnumerable {
         _decimals = 18;
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _setRoleAdmin(MINTER_ROLE, MINTER_ROLE);
+        // grant minter role to the IMA bridge(TokenManagerERC20)
         _setupRole(MINTER_ROLE, 0xD2aAA00500000000000000000000000000000000);
     }
 
